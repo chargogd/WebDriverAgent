@@ -27,6 +27,11 @@ id<FBResponsePayload> FBResponseWithOK()
   return FBResponseWithStatus(FBCommandStatus.ok);
 }
 
+id<FBResponsePayload> FBResponseWithTimestamp(NSString * timeStamp)
+{
+  return FBResponseWithStatus([FBCommandStatus okWithTimeStamp:timeStamp]);
+}
+
 id<FBResponsePayload> FBResponseWithObject(id object)
 {
   return FBResponseWithStatus([FBCommandStatus okWithValue:object]);
@@ -75,6 +80,9 @@ id<FBResponsePayload> FBResponseWithStatus(FBCommandStatus *status)
     value[@"message"] = status.message ?: @"";
     value[@"traceback"] = status.traceback ?: @"";
     response[@"value"] = value.copy;
+  }
+  if (status.timestamp){
+    response[@"timestamp"] = status.timestamp;
   }
 
   return [[FBResponseJSONPayload alloc] initWithDictionary:response.copy

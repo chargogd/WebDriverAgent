@@ -89,6 +89,21 @@ static NSString *const FB_NO_SUCH_DRIVER_MSG = @"A session is either terminated 
   return self;
 }
 
+- (instancetype)initWithTimestamp:(NSString *)timestamp
+{
+  self = [super init];
+  if (self) {
+    _value = nil;
+    _message = nil;
+    _error = nil;
+    _traceback = nil;
+    _statusCode = kHTTPStatusCodeOK;
+    _timestamp = timestamp;
+  }
+  return self;
+}
+
+
 - (instancetype)initWithError:(NSString *)error
                    statusCode:(HTTPStatusCode)statusCode
                       message:(NSString *)message
@@ -113,6 +128,11 @@ static NSString *const FB_NO_SUCH_DRIVER_MSG = @"A session is either terminated 
 + (instancetype)okWithValue:(id)value
 {
   return [[FBCommandStatus alloc] initWithValue:value];
+}
+
++ (instancetype)okWithTimeStamp:(id)timeStamp
+{
+  return [[FBCommandStatus alloc] initWithTimestamp:timeStamp];
 }
 
 + (instancetype)unknownErrorWithMessage:(NSString *)message

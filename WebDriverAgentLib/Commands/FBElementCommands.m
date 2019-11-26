@@ -255,7 +255,9 @@
 #endif
     return FBResponseWithStatus([FBCommandStatus invalidElementStateErrorWithMessage:error.description traceback:nil]);
   }
-  return FBResponseWithOK();
+  NSDate *datenow = [NSDate date];
+  NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]*1000];//毫秒级
+    return  FBResponseWithTimestamp(timeSp);
 }
 
 + (id<FBResponsePayload>)handleClear:(FBRouteRequest *)request
@@ -485,7 +487,10 @@
       return FBResponseWithStatus([FBCommandStatus invalidElementStateErrorWithMessage:error.description traceback:nil]);
     }
   }
-  return FBResponseWithOK();
+  NSDate *datenow = [NSDate date];
+  NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]*1000];//毫秒级
+  return  FBResponseWithTimestamp(timeSp);
+  //return FBResponseWithOK();
 }
 
 + (id<FBResponsePayload>)handlePinch:(FBRouteRequest *)request

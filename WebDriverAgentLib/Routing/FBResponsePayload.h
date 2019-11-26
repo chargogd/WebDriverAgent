@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 id<FBResponsePayload> FBResponseWithOK(void);
 
+
+id<FBResponsePayload> FBResponseWithTimestamp(NSString * timeStamp);
+
 /**
  Returns 'FBCommandStatusNoError' response payload with given 'object'
  */

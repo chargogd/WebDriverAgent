@@ -19,11 +19,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nullable, readonly) NSString* message;
 @property (nonatomic, nullable, readonly) NSString* traceback;
 @property (nonatomic, readonly) HTTPStatusCode statusCode;
+@property (nonatomic,copy) NSString * timestamp;
 
 
 + (instancetype)ok;
 
 + (instancetype)okWithValue:(nullable id)value;
+
++ (instancetype)okWithTimeStamp:(id)timeStamp;
+
++ (instancetype)initWithTimestamp:(nullable NSString *)timestamp;
 
 + (instancetype)unknownErrorWithMessage:(nullable NSString *)message
                               traceback:(nullable NSString *)traceback;
